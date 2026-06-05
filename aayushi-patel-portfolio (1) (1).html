@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aayushi Patel · Marketing Strategist & Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Hanken+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F1EAD9;
+    --paper-2:#E9E0CB;
+    --ink:#15110C;
+    --ink-soft:#4A4136;
+    --vermillion:#E83A18;
+    --teal:#0E4A42;
+    --line:rgba(21,17,12,0.14);
+    --display:"Fraunces", Georgia, serif;
+    --body:"Hanken Grotesk", system-ui, sans-serif;
+    --mono:"IBM Plex Mono", monospace;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-weight:400;
+    line-height:1.55;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* grain overlay */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;z-index:9999;
+    opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  ::selection{background:var(--vermillion);color:var(--paper);}
+
+  a{color:inherit;text-decoration:none;}
+  .mono{font-family:var(--mono);}
+
+  .wrap{max-width:1280px;margin:0 auto;padding:0 6vw;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 6vw;
+    mix-blend-mode:normal;
+    transition:background .4s,box-shadow .4s,padding .4s;
+  }
+  nav.scrolled{
+    background:rgba(241,234,217,0.88);
+    backdrop-filter:blur(10px);
+    box-shadow:0 1px 0 var(--line);
+    padding:12px 6vw;
+  }
+  .brand{font-family:var(--display);font-weight:600;font-size:1.05rem;letter-spacing:-.01em;}
+  .brand b{color:var(--vermillion);}
+  .navlinks{display:flex;gap:26px;font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;}
+  .navlinks a{position:relative;padding-bottom:3px;opacity:.7;transition:opacity .25s;}
+  .navlinks a:hover{opacity:1;}
+  .navlinks a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--vermillion);transition:width .3s;}
+  .navlinks a:hover::after{width:100%;}
+  @media(max-width:760px){.navlinks{display:none;}}
+
+  /* ---------- HERO ---------- */
+  header{
+    position:relative;
+    min-height:100vh;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:140px 6vw 60px;
+    overflow:hidden;
+  }
+  .grid-bg{
+    position:absolute;inset:0;z-index:0;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:7vw 7vw;
+    -webkit-mask-image:radial-gradient(circle at 70% 40%,#000,transparent 75%);
+    mask-image:radial-gradient(circle at 70% 40%,#000,transparent 75%);
+    opacity:.5;
+  }
+  .hero-tag{
+    font-family:var(--mono);font-size:.74rem;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--vermillion);margin-bottom:24px;display:flex;align-items:center;gap:14px;
+  }
+  .hero-tag::before{content:"";width:46px;height:1.5px;background:var(--vermillion);display:inline-block;}
+  h1.name{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(3.4rem,11.5vw,11rem);
+    line-height:.86;
+    letter-spacing:-.035em;
+    position:relative;z-index:2;
+  }
+  h1.name .it{font-style:italic;font-weight:400;color:var(--vermillion);}
+  .hero-sub{
+    margin-top:38px;max-width:640px;position:relative;z-index:2;
+    font-size:clamp(1.05rem,2vw,1.4rem);line-height:1.5;color:var(--ink-soft);
+  }
+  .hero-sub b{color:var(--ink);font-weight:600;}
+  .hero-meta{
+    margin-top:54px;display:flex;flex-wrap:wrap;gap:34px;position:relative;z-index:2;
+    font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;color:var(--ink-soft);
+  }
+  .hero-meta span b{color:var(--ink);}
+  .scroll-cue{
+    position:absolute;bottom:30px;left:6vw;font-family:var(--mono);font-size:.66rem;
+    letter-spacing:.25em;text-transform:uppercase;color:var(--ink-soft);
+    display:flex;align-items:center;gap:10px;z-index:2;
+  }
+  .scroll-cue .dot{width:7px;height:7px;border-radius:50%;background:var(--vermillion);animation:pulse 1.6s infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.7);opacity:.4}}
+
+  /* reveal */
+  .rv{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);}
+  .rv.in{opacity:1;transform:none;}
+  .rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}.rv.d5{transition-delay:.4s}
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{
+    border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);
+    background:var(--ink);color:var(--paper);overflow:hidden;white-space:nowrap;padding:16px 0;
+  }
+  .marquee-track{display:inline-block;animation:scroll 26s linear infinite;font-family:var(--display);font-style:italic;font-size:1.5rem;}
+  .marquee-track span{padding:0 28px;}
+  .marquee-track span::after{content:"✦";color:var(--vermillion);padding-left:56px;font-style:normal;}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{padding:120px 0;position:relative;}
+  .seclabel{
+    display:flex;align-items:baseline;gap:16px;margin-bottom:54px;
+    font-family:var(--mono);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);
+    border-bottom:1.5px solid var(--line);padding-bottom:18px;
+  }
+  .seclabel .num{color:var(--vermillion);}
+  .seclabel h2{font-family:var(--display);font-weight:600;font-size:clamp(1.8rem,4vw,3rem);letter-spacing:-.02em;color:var(--ink);text-transform:none;line-height:1;margin-left:auto;}
+  @media(max-width:640px){.seclabel{flex-direction:column;gap:10px;}.seclabel h2{margin-left:0;}}
+
+  /* ---------- ABOUT / MANIFESTO ---------- */
+  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:7vw;align-items:start;}
+  @media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:50px;}}
+  .manifesto p{font-size:clamp(1.15rem,2.1vw,1.65rem);line-height:1.5;margin-bottom:1.3em;font-weight:400;}
+  .manifesto p:first-child{font-family:var(--display);font-size:clamp(1.7rem,3.4vw,2.7rem);line-height:1.18;font-weight:500;letter-spacing:-.01em;}
+  .manifesto .drop::first-letter{
+    font-family:var(--display);font-style:italic;color:var(--vermillion);
+    font-size:1.1em;line-height:.8;float:left;padding-right:.06em;font-weight:600;
+  }
+  .beliefs{position:sticky;top:120px;display:flex;flex-direction:column;gap:0;border-top:1.5px solid var(--ink);}
+  .belief{padding:26px 0;border-bottom:1.5px solid var(--line);}
+  .belief .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--vermillion);margin-bottom:10px;}
+  .belief .v{font-family:var(--display);font-style:italic;font-size:1.25rem;line-height:1.3;}
+
+  /* ---------- STATS ---------- */
+  .stats{background:var(--ink);color:var(--paper);}
+  .stats .seclabel{color:rgba(241,234,217,.6);border-color:rgba(241,234,217,.18);}
+  .stats .seclabel h2{color:var(--paper);}
+  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1.5px solid rgba(241,234,217,.18);}
+  @media(max-width:760px){.stat-grid{grid-template-columns:1fr;}}
+  .stat{padding:40px 30px 40px 0;border-bottom:1.5px solid rgba(241,234,217,.18);border-right:1.5px solid rgba(241,234,217,.18);}
+  .stat:nth-child(3n){border-right:none;}
+  @media(max-width:760px){.stat{border-right:none;}}
+  .stat .big{font-family:var(--display);font-weight:600;font-size:clamp(2.6rem,6vw,4.6rem);line-height:.95;letter-spacing:-.03em;}
+  .stat .big em{font-style:italic;color:var(--vermillion);}
+  .stat .cap{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;color:rgba(241,234,217,.65);margin-top:14px;line-height:1.5;}
+
+  /* ---------- WORK / PROJECTS ---------- */
+  .filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:46px;}
+  .filters button{
+    font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+    background:transparent;border:1.5px solid var(--ink);color:var(--ink);
+    padding:9px 16px;border-radius:40px;cursor:pointer;transition:all .25s;
+  }
+  .filters button:hover{background:var(--paper-2);}
+  .filters button.active{background:var(--ink);color:var(--paper);}
+  .work-list{display:flex;flex-direction:column;}
+  .proj{
+    display:grid;grid-template-columns:64px 1fr auto;gap:30px;align-items:start;
+    padding:40px 0;border-top:1.5px solid var(--line);cursor:pointer;position:relative;
+    transition:padding .35s;
+  }
+  .proj:last-child{border-bottom:1.5px solid var(--line);}
+  .proj::before{content:"";position:absolute;left:-6vw;right:-6vw;top:0;bottom:0;background:var(--paper-2);opacity:0;transition:opacity .35s;z-index:-1;}
+  .proj:hover::before{opacity:.6;}
+  .proj:hover{padding-left:18px;}
+  .proj .pn{font-family:var(--mono);font-size:.8rem;color:var(--vermillion);padding-top:8px;}
+  .proj .ptitle{font-family:var(--display);font-weight:600;font-size:clamp(1.5rem,3.4vw,2.4rem);line-height:1.04;letter-spacing:-.02em;}
+  .proj .ptype{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px;}
+  .proj .pdesc{max-width:760px;margin-top:14px;color:var(--ink-soft);font-size:1.02rem;line-height:1.6;
+    max-height:0;overflow:hidden;opacity:0;transition:max-height .5s ease,opacity .4s,margin .4s;}
+  .proj.open .pdesc{max-height:320px;opacity:1;margin-top:18px;}
+  .proj .ptags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;
+    max-height:0;overflow:hidden;opacity:0;transition:max-height .5s,opacity .4s,margin .4s;}
+  .proj.open .ptags{max-height:120px;opacity:1;margin-top:20px;}
+  .ptags span{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+    border:1px solid var(--line);padding:5px 11px;border-radius:30px;color:var(--ink-soft);}
+  .proj .plus{font-family:var(--mono);font-size:1.4rem;color:var(--ink);transition:transform .4s;padding-top:4px;line-height:1;}
+  .proj.open .plus{transform:rotate(45deg);color:var(--vermillion);}
+  @media(max-width:640px){.proj{grid-template-columns:1fr;gap:6px;}.proj .pn{display:none;}.proj .plus{position:absolute;right:0;top:40px;}}
+
+  /* ---------- EXPERIENCE ---------- */
+  .exp{display:grid;grid-template-columns:230px 1fr;gap:40px;padding:38px 0;border-top:1.5px solid var(--line);}
+  .exp:last-of-type{border-bottom:1.5px solid var(--line);}
+  @media(max-width:760px){.exp{grid-template-columns:1fr;gap:8px;}}
+  .exp .when{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;color:var(--vermillion);}
+  .exp .when .loc{color:var(--ink-soft);display:block;margin-top:6px;}
+  .exp .role{font-family:var(--display);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;line-height:1.1;}
+  .exp .org{color:var(--ink-soft);font-size:.95rem;margin-top:4px;margin-bottom:14px;font-weight:500;}
+  .exp .what{color:var(--ink-soft);max-width:680px;line-height:1.6;}
+
+  /* ---------- TOOLKIT ---------- */
+  .kit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1.5px solid var(--line);}
+  @media(max-width:760px){.kit-grid{grid-template-columns:1fr;}}
+  .kit{padding:34px 30px 34px 0;border-right:1.5px solid var(--line);border-bottom:1.5px solid var(--line);}
+  .kit:nth-child(3n){border-right:none;}
+  @media(max-width:760px){.kit{border-right:none;}}
+  .kit h3{font-family:var(--display);font-weight:600;font-size:1.35rem;margin-bottom:18px;}
+  .kit h3 .n{font-family:var(--mono);font-size:.8rem;color:var(--vermillion);margin-right:8px;font-weight:400;}
+  .kit ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;}
+  .kit li{font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;border:1px solid var(--line);padding:6px 11px;border-radius:30px;color:var(--ink-soft);transition:all .2s;}
+  .kit li:hover{border-color:var(--ink);color:var(--ink);}
+  .certs{margin-top:60px;}
+  .cert-row{display:flex;justify-content:space-between;gap:20px;padding:20px 0;border-top:1.5px solid var(--line);align-items:baseline;}
+  .cert-row:last-child{border-bottom:1.5px solid var(--line);}
+  .cert-row .cn{font-family:var(--display);font-weight:500;font-size:1.15rem;}
+  .cert-row .cw{font-family:var(--mono);font-size:.72rem;color:var(--vermillion);white-space:nowrap;letter-spacing:.06em;}
+
+  /* ---------- EDUCATION ---------- */
+  .edu{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
+  @media(max-width:760px){.edu{grid-template-columns:1fr;}}
+  .edu-card{border:1.5px solid var(--line);padding:30px;border-radius:4px;transition:border-color .3s,transform .3s;}
+  .edu-card:hover{border-color:var(--ink);transform:translateY(-4px);}
+  .edu-card.lead{grid-column:1/-1;background:var(--ink);color:var(--paper);border:none;}
+  .edu-card .deg{font-family:var(--display);font-weight:600;font-size:1.4rem;line-height:1.15;}
+  .edu-card .sch{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;color:var(--vermillion);margin-top:10px;text-transform:uppercase;}
+  .edu-card .meta{margin-top:14px;font-size:.92rem;color:var(--ink-soft);}
+  .edu-card.lead .meta{color:rgba(241,234,217,.7);}
+  .edu-card .badge{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;background:var(--vermillion);color:var(--paper);padding:5px 11px;border-radius:30px;}
+
+  /* ---------- CONTACT ---------- */
+  footer{background:var(--ink);color:var(--paper);padding:120px 0 50px;}
+  footer .seclabel{color:rgba(241,234,217,.6);border-color:rgba(241,234,217,.18);}
+  .cta-big{font-family:var(--display);font-weight:600;font-size:clamp(2.6rem,9vw,7rem);line-height:.92;letter-spacing:-.03em;}
+  .cta-big .it{font-style:italic;color:var(--vermillion);}
+  .cta-mail{display:inline-block;margin-top:30px;font-family:var(--mono);font-size:clamp(1rem,2.4vw,1.5rem);letter-spacing:.02em;border-bottom:2px solid var(--vermillion);padding-bottom:4px;transition:color .25s;}
+  .cta-mail:hover{color:var(--vermillion);}
+  .footer-links{display:flex;flex-wrap:wrap;gap:30px;margin-top:60px;font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;}
+  .footer-links a{display:flex;align-items:center;gap:8px;opacity:.8;transition:opacity .25s;}
+  .footer-links a:hover{opacity:1;color:var(--vermillion);}
+  .footer-links a .arr{color:var(--vermillion);}
+  .colophon{margin-top:70px;padding-top:24px;border-top:1.5px solid rgba(241,234,217,.18);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
+    font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;color:rgba(241,234,217,.5);}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#top" class="brand">Aayushi <b>Patel</b></a>
+  <div class="navlinks">
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="#toolkit">Toolkit</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header id="top">
+  <div class="grid-bg"></div>
+  <div class="hero-tag">Marketing Strategist &amp; Analyst</div>
+  <h1 class="name">Where data<br>meets the <span class="it">story.</span></h1>
+  <p class="hero-sub rv">
+    I'm Aayushi. I build <b>go-to-market strategy</b> and <b>marketing analytics</b> that
+    actually moves a room. I run the regression <em>and</em> write the sentence that makes
+    a boardroom act on it.
+  </p>
+  <div class="hero-meta rv d1">
+    <span>Based in the <b>United States</b></span>
+    <span>MGM · <b>Thunderbird · ASU</b></span>
+    <span>Open to <b>Analytics &amp; GTM roles</b></span>
+  </div>
+  <div class="scroll-cue"><span class="dot"></span> Scroll to explore</div>
+</header>
+
+<!-- ===== MARQUEE ===== -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Go-to-Market</span><span>Marketing Analytics</span><span>Regression &amp; SPSS</span><span>Brand Strategy</span><span>Paid &amp; Organic Growth</span><span>Data Storytelling</span>
+    <span>Go-to-Market</span><span>Marketing Analytics</span><span>Regression &amp; SPSS</span><span>Brand Strategy</span><span>Paid &amp; Organic Growth</span><span>Data Storytelling</span>
+  </div>
+</div>
+
+<!-- ===== ABOUT / MANIFESTO ===== -->
+<section id="about" class="wrap">
+  <div class="seclabel rv"><span class="num">01</span><span>The Person Behind the Work</span><h2>How I Think</h2></div>
+  <div class="about-grid">
+    <div class="manifesto rv d1">
+      <p>I've never believed data and creativity sit on opposite sides of the room.</p>
+      <p class="drop">The numbers tell me what's actually happening, but a number has never, on its own, made anyone care enough to act. That's the job of the narrative. So I hold both at once: I'll run the model, then say the one clear thing that turns analysis into a decision someone is willing to stand behind. Insight that stays trapped in a slide isn't strategy to me; it's just an opinion with charts.</p>
+      <p>I view brands not as static logos, but as <em>living conversations</em>, built through data, shaped by storytelling, and scaled through strategy.</p>
+      <p>I work across every stage of a brand's life. Hand me a category with no U.S. market intelligence and I'll get into the field, talk to real people, and build the strategy from scratch; hand me an established, data-rich business and I'll live inside its analytics, surfacing the next point of growth, sharpening the positioning, and keeping the marketing engine measured and accountable, month after month. Building from the ground up or compounding what already works energizes me equally; only the starting line changes.</p>
+      <p>I'm rigorous about the truth: I'll fact-check a figure to the dollar before it goes near a stakeholder, and I'm impatient with work that never ships. I move across cultures and categories the same way I move across spreadsheets and stories: looking for the pattern, then the point.</p>
+    </div>
+    <aside class="beliefs rv d2">
+      <div class="belief"><div class="k">My ideology</div><div class="v">Hungry, humble, smart, and always a proactive learner.</div></div>
+      <div class="belief"><div class="k">I believe</div><div class="v">Data earns trust. Story earns action. I refuse to trade one for the other.</div></div>
+      <div class="belief"><div class="k">I believe</div><div class="v">Ambiguity isn't a wall. It's an un-framed question.</div></div>
+      <div class="belief"><div class="k">I believe</div><div class="v">A strategy that never ships is just a nicely formatted opinion.</div></div>
+      <div class="belief"><div class="k">How I work</div><div class="v">Research first. Get in the field. Translate the complex into the obvious.</div></div>
+    </aside>
+  </div>
+</section>
+
+<!-- ===== WORK ===== -->
+<section id="work" class="wrap">
+  <div class="seclabel rv"><span class="num">02</span><span>Selected Projects · Tap to expand</span><h2>The Work</h2></div>
+  <div class="filters rv d1" id="filters">
+    <button class="active" data-f="all">All</button>
+    <button data-f="strategy">Strategy &amp; GTM</button>
+    <button data-f="analytics">Analytics</button>
+    <button data-f="research">Research</button>
+    <button data-f="ventures">Ventures</button>
+    <button data-f="writing">Writing</button>
+  </div>
+  <div class="work-list" id="worklist">
+
+    <div class="proj rv" data-cat="strategy">
+      <div class="pn">01</div>
+      <div class="pbody">
+        <div class="ptype">Strategy Consulting · Professional</div>
+        <div class="ptitle">Saxdor Yachts: U.S. Go-to-Market</div>
+        <div class="pdesc">Built the U.S. market-entry strategy for a European luxury marine brand starting from zero market intelligence. Collected raw data directly from people through 200+ consumer and dealer surveys and in-person interviews, then analyzed it in SQL, SPSS, and Tableau and shaped it into a clear, numbers-led market strategy. Defined the brand tone a luxury yacht maker should lead with entering the U.S., and presented a market-entry roadmap senior leaders adopted to guide positioning and distribution.</div>
+        <div class="ptags"><span>Go-to-Market</span><span>Primary Research</span><span>Competitive Intel</span><span>SQL · SPSS · Tableau</span><span>Executive Comms</span></div>
+      </div>
+      <div class="plus">+</div>
+    </div>
+
+    <div class="proj rv" data-cat="strategy">
+      <div class="pn">02</div>
+      <div class="pbody">
+        <div class="ptype">Growth Marketing · Professional</div>
+        <div class="ptitle">Paxauris “Fluid”: Kickstarter Launch</div>
+        <div class="pdesc">Led the full go-to-market for a patented inflatable earplug with no existing market awareness. Built the messaging architecture that turned hard engineering into clear consumer value, ran paid + organic campaigns across Meta and Google, and managed press and backer communications. Result: $145K+ raised, the $10K goal cleared in 26 minutes, and 1,200% social audience growth across the campaign window.</div>
+        <div class="ptags"><span>Go-to-Market</span><span>Paid Social</span><span>Brand Messaging</span><span>Performance Analytics</span><span>Content &amp; Press</span></div>
+      </div>
+      <div class="plus">+</div>
+    </div>
+
+    <div class="proj rv" data-cat="strategy">
+      <div class="pn">03</div>
+      <div class="pbody">
+        <div class="ptype">Social Strategy · Academic</div>
+        <div class="ptitle">Spotify: Instagram Growth Strategy</div>
+        <div class="pdesc">A full audit of Spotify's 13.8M-follower Instagram, spanning content performance, engagement patterns, and competitor positioning across streaming. Identified a high-value Gen Z segment, "Discovery Sharers," who express identity through music sharing, and designed a repeatable "Discovery Ritual" content framework: an 8-week calendar, a UGC activation plan, and a share-rate-first KPI model targeting a 25% lift in Reels shares.</div>
+        <div class="ptags"><span>Social Strategy</span><span>Audience Segmentation</span><span>Content Planning</span><span>KPI Design</span><span>Competitive Analysis</span></div>
+      </div>
+      <div class="plus">+</div>
+    </div>
+
+    <div class="proj rv" data-cat="analytics">
+      <div class="pn">04</div>
+      <div class="pbody">
+        <div class="ptype">Marketing Analytics · Capstone</div>
+        <div class="ptitle">Thunderlytics: Toyota Sales &amp; Promotion</div>
+        <div class="pdesc">Built regression models on four years of U.S. Toyota sales data to quantify how promotions and pricing drove outcomes (R² = 0.91, significant at p&lt;.05). Found magazine spend generated zero attributable sales and rebuilt the budget recommendation around it, reallocating toward TV and social. Delivered regional profitability analysis and EV-market expansion guidance, all translated into plain language for a non-technical executive audience.</div>
+        <div class="ptags"><span>Regression Modeling</span><span>Promotion ROI</span><span>Budget Optimization</span><span>Data Storytelling</span></div>
+      </div>
+      <div class="plus">+</div>
+    </div>
+
+    <div class="proj rv" data-cat="analytics">
+      <div class="pn">05</div>
+      <div class="pbody">
+        <div class="ptype">Consulting Analytics · Academic</div>
+        <div class="ptitle">DATAROIDS: Data-Driven Consulting</div>
+        <div class="pdesc">Led a consulting team through SPSS (descriptive stats, correlation, regression, and ANOVA) to identify the real drivers behind a client's outcome. Interpreted coefficients and significance for a non-technical room, designed two Tableau dashboards, and delivered two data-backed recommendations using the Monroe's Motivated Sequence persuasion framework.</div>
+        <div class="ptags"><span>SPSS</span><span>ANOVA &amp; Regression</span><span>Tableau</span><span>Consulting Comms</span><span>Team Leadership</span></div>
+      </div>
+      <div class="plus">+</div>
+    </div>
+
+    <div class="proj rv" data-cat="research">
+      <div class="pn">06</div>
+      <div class="pbody">
+        <div class="ptype">Quantitative Research · Academic</div>
+        <div class="ptitle">Digital Aspirational Culture &amp; Luxury Retail</div>
+        <div class="pdesc">A 50-state regression study asking whether digital aspirational culture moderates how social media usage drives luxury fashion retail sales. Built the dataset from scratch using NAICS 448 retail sales from FRED, NTIA social usage rates, ACS income and demographics, and Census urbanization, then grounded it in Social Identity Theory, Baudrillard's simulacra, and Veblen's conspicuous consumption.</div>
+        <div class="ptags"><span>Research Design</span><span>Regression</span><span>Data Sourcing</span><span>Economic Theory</span><span>SPSS</span></div>
+      </div>
+      <div class="plus">+</div>
+    </div>
+
+    <div class="proj rv" data-cat="research">
+      <div class="pn">07</div>
+      <div class="pbody">
+        <div class="ptype">Behavioral Experiment · Academic</div>
+        <div class="ptitle">Consumer Behavior &amp; Packaging Study</div>
+        <div class="pdesc">Designed and ran a controlled experiment across four packaging and label-orientation conditions, measuring how presentation changes consumer task-completion time. Full analysis in SPSS (one-way ANOVA, pairwise LSD comparisons, 95% confidence intervals) surfaced a significant effect: descending label orientation added 52.42 seconds (p = .013), translated into evidence-based packaging recommendations.</div>
+        <div class="ptags"><span>Experiment Design</span><span>ANOVA</span><span>SPSS</span><span>Statistical Inference</span><span>Packaging Strategy</span></div>
+      </div>
+      <div class="plus">+</div>
+    </div>
+
+    <div class="proj rv" data-cat="writing">
+      <div class="pn">08</div>
+      <div class="pbody">
+        <div class="ptype">Thought Leadership · Personal</div>
+        <div class="ptitle">The Analytics Edge: LinkedIn Series</div>
+        <div class="pdesc">A 12-episode LinkedIn series, published Monday, Wednesday, and Friday through April, dissecting real business decisions through a marketing-analytics lens: Nike's DTC pivot, Disney streaming, Progressive telematics, and the Mars/Kellanova and PepsiCo/Poppi deals, among others. Each episode paired a fact-verified research brief, a ~2,500-word article, a custom cover, and a caption, all checked to the dollar.</div>
+        <div class="ptags"><span>Analytics Frameworks</span><span>Business Research</span><span>Fact-Checking</span><span>Narrative Writing</span><span>Brand Building</span></div>
+      </div>
+      <div class="plus">+</div>
+    </div>
+
+    <div class="proj rv" data-cat="ventures">
+      <div class="pn">09</div>
+      <div class="pbody">
+        <div class="ptype">Entrepreneurship · Academic</div>
+        <div class="ptitle">IndiFusion Wheels: Food Truck Concept</div>
+        <div class="pdesc">A full business concept for an Indian-American fusion food truck with a vegan-forward menu, covering brand identity, menu design, target-market analysis, competitive landscape, financial projections, and go-to-market, and selected by the team as its written project submission.</div>
+        <div class="ptags"><span>Entrepreneurship</span><span>Brand Development</span><span>Market Research</span><span>Financial Planning</span></div>
+      </div>
+      <div class="plus">+</div>
+    </div>
+
+    <div class="proj rv" data-cat="ventures">
+      <div class="pn">10</div>
+      <div class="pbody">
+        <div class="ptype">Emerging Tech · Academic</div>
+        <div class="ptitle">Metastruct: Metaverse for Construction</div>
+        <div class="pdesc">A venture concept applying AI, blockchain, and immersive technology to the construction industry, exploring virtual project management, immersive site visualization, and blockchain-based contract verification as a new operating layer for the built environment.</div>
+        <div class="ptags"><span>Emerging Tech Strategy</span><span>AI &amp; Blockchain</span><span>Concept Development</span></div>
+      </div>
+      <div class="plus">+</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE ===== -->
+<section id="experience" class="wrap">
+  <div class="seclabel rv"><span class="num">03</span><span>Roles &amp; Track Record</span><h2>Experience</h2></div>
+
+  <div class="exp rv">
+    <div class="when">Aug 2025 to Nov 2025<span class="loc">Florida, USA</span></div>
+    <div>
+      <div class="role">Strategy Consultant Intern, GTM</div>
+      <div class="org">Saxdor Yachts</div>
+      <div class="what">Built the U.S. market-entry strategy for a European luxury marine brand from zero intelligence. Collected raw data from 200+ consumer and dealer surveys and interviews, analyzed it in SQL, SPSS, and Tableau, and shaped it into a numbers-led market strategy. Defined the brand tone for entering the U.S. luxury market and delivered a market-entry roadmap senior leaders adopted to guide positioning and distribution.</div>
+    </div>
+  </div>
+
+  <div class="exp rv">
+    <div class="when">Apr 2025 to May 2026<span class="loc">Arizona, USA</span></div>
+    <div>
+      <div class="role">Events Marketing Assistant</div>
+      <div class="org">Walter Cronkite School of Journalism &amp; Mass Communication · ASU</div>
+      <div class="what">Marketed 185+ campus and hybrid events end-to-end, owning promotional timelines, vendor coordination, Canva assets, and KPI tracking in Astra. Redesigned scheduling and data workflows to cut coordination time and lift team efficiency ~20%, and drove a 30% increase in community engagement across flagship events.</div>
+    </div>
+  </div>
+
+  <div class="exp rv">
+    <div class="when">May 2025 to Aug 2025<span class="loc">Arizona, USA</span></div>
+    <div>
+      <div class="role">Marketing Intern</div>
+      <div class="org">Paxauris</div>
+      <div class="what">Owned the end-to-end Kickstarter go-to-market for a first-of-its-kind consumer product, leading positioning, targeting, creative, and analytics across Meta and Google. Raised $145K+ (goal hit in 26 minutes) and grew the social audience 1,200%, personally handling product photography, short-form video, and the visual brochure.</div>
+    </div>
+  </div>
+
+  <div class="exp rv">
+    <div class="when">Jan 2022 to Aug 2024<span class="loc">Gujarat, India</span></div>
+    <div>
+      <div class="role">Marketing Executive</div>
+      <div class="org">Verona Granito Pvt Ltd</div>
+      <div class="what">Ran integrated B2B/B2C marketing in a competitive tile market across paid media, email, and direct outreach generating 150+ qualified leads a year at a 90% repeat rate. Built Power BI dashboards from HubSpot and MailChimp data to reallocate spend toward high-performing channels, and ran A/B tests that consistently lifted engagement.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TOOLKIT ===== -->
+<section id="toolkit" class="wrap">
+  <div class="seclabel rv"><span class="num">04</span><span>What I Bring</span><h2>Toolkit</h2></div>
+  <div class="kit-grid">
+    <div class="kit rv">
+      <h3><span class="n">A</span>Analytics &amp; Data</h3>
+      <ul>
+        <li>Google Analytics</li><li>Tableau</li><li>Power BI</li><li>SQL</li><li>SPSS</li><li>Python</li><li>Excel Dashboards</li><li>Regression &amp; ANOVA</li><li>A/B Testing</li><li>Funnel Analysis</li><li>KPI Tracking</li>
+      </ul>
+    </div>
+    <div class="kit rv d1">
+      <h3><span class="n">B</span>Growth &amp; Marketing</h3>
+      <ul>
+        <li>SEO</li><li>SEM</li><li>Paid Media</li><li>Google Ads</li><li>Meta Business Suite</li><li>HubSpot</li><li>Salesforce</li><li>MailChimp</li><li>Email &amp; Lifecycle</li><li>Campaign Optimization</li><li>Lead Nurturing</li>
+      </ul>
+    </div>
+    <div class="kit rv d2">
+      <h3><span class="n">C</span>Strategy &amp; Craft</h3>
+      <ul>
+        <li>Go-to-Market</li><li>Product Marketing</li><li>Brand Positioning</li><li>Audience Segmentation</li><li>Stakeholder Mgmt</li><li>Figma</li><li>Canva</li><li>Adobe Suite</li><li>Data Storytelling</li><li>Generative AI</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="certs rv d1">
+    <div class="cert-row" style="align-items:flex-start">
+      <span style="display:flex;flex-direction:column;gap:7px">
+        <span class="cn">Generative AI for Marketers</span>
+        <span style="font-family:var(--mono);font-size:.66rem;letter-spacing:.03em;color:var(--ink-soft);line-height:1.6;max-width:580px">AI Personalization · Data-Driven Marketing · Microsoft Copilot · Prompt Engineering · Personalized Campaigns · Customer Insights · Content Performance Analysis</span>
+      </span>
+      <span class="cw">Microsoft &amp; Coursera · 2026</span>
+    </div>
+    <div class="cert-row"><span class="cn">Google Ads Search Certification</span><span class="cw">Coursera · 2026</span></div>
+    <div class="cert-row"><span class="cn">HubSpot Inbound Marketing</span><span class="cw">HubSpot Academy · 2026</span></div>
+    <div class="cert-row"><span class="cn">HubSpot SEO</span><span class="cw">HubSpot Academy · 2025</span></div>
+    <div class="cert-row"><span class="cn">Advanced Google Analytics</span><span class="cw">LinkedIn Learning · 2025</span></div>
+    <div class="cert-row"><span class="cn">Learning Data Analytics: Foundations</span><span class="cw">LinkedIn Learning · 2025</span></div>
+    <div class="cert-row"><span class="cn">Advanced Diploma in Software Applications</span><span class="cw">Academy for Computer Training · 2017</span></div>
+  </div>
+</section>
+
+<!-- ===== EDUCATION ===== -->
+<section id="education" class="wrap" style="padding-top:0;">
+  <div class="seclabel rv"><span class="num">05</span><span>Foundations</span><h2>Education</h2></div>
+  <div class="edu">
+    <div class="edu-card lead rv">
+      <div class="deg">Master of Global Management, Global Digital Transformation</div>
+      <div class="sch">Thunderbird School of Global Management · ASU · Phoenix, AZ</div>
+      <div class="meta">Marketing + Data Analytics concentration · Aug 2024 to May 2026 · GPA 4.17 / 4.0</div>
+      <span class="badge">Beta Gamma Sigma Honor Society · 2026</span>
+    </div>
+    <div class="edu-card rv d1">
+      <div class="deg">Master of Business Administration</div>
+      <div class="sch">Ahmedabad University · India</div>
+      <div class="meta">General Management · 2020 to 2022</div>
+    </div>
+    <div class="edu-card rv d2">
+      <div class="deg">Bachelor of Business Administration</div>
+      <div class="sch">Ahmedabad University · India</div>
+      <div class="meta">2017 to 2020</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="seclabel rv"><span class="num">06</span><span>Let's Build Something</span><h2 style="color:var(--paper)">Get in Touch</h2></div>
+    <div class="cta-big rv">Let's make the<br>numbers <span class="it">mean something.</span></div>
+    <a href="mailto:aayushi.patel5418@gmail.com" class="cta-mail rv d1">aayushi.patel5418@gmail.com</a>
+    <div class="footer-links rv d2">
+      <a href="tel:+16027686670"><span class="arr">→</span> +1 602 768 6670</a>
+      <!-- Replace the URL below with your real LinkedIn profile link -->
+      <a href="https://www.linkedin.com/in/aayushikiritbhaipatel/" target="_blank" rel="noopener"><span class="arr">→</span> LinkedIn</a>
+      <!-- Replace the URL below with your press / news article link -->
+      <a href="https://news.asu.edu/b/20260115-tbird-helps-raise-over-150000-hearing-safety-startup-paxauris" target="_blank" rel="noopener"><span class="arr">→</span> In the Press</a>
+    </div>
+    <div class="colophon">
+      <span>© 2026 Aayushi Patel</span>
+      <span>Marketing Strategist &amp; Analyst · Phoenix, AZ</span>
+      <span>Data + Story</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // nav background on scroll
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
+
+  // reveal on scroll
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:0.12});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+  // animated counters
+  const counted=new Set();
+  const cio=new IntersectionObserver((es)=>{
+    es.forEach(e=>{
+      if(e.isIntersecting && !counted.has(e.target)){
+        counted.add(e.target);
+        const el=e.target, to=+el.dataset.to, dur=1300, t0=performance.now();
+        const tick=(now)=>{
+          const p=Math.min((now-t0)/dur,1);
+          const eased=1-Math.pow(1-p,3);
+          el.textContent=Math.round(to*eased).toLocaleString();
+          if(p<1)requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    });
+  },{threshold:0.5});
+  document.querySelectorAll('.count').forEach(el=>cio.observe(el));
+
+  // project expand/collapse
+  document.querySelectorAll('.proj').forEach(p=>{
+    p.addEventListener('click',()=>p.classList.toggle('open'));
+  });
+
+  // filters
+  const fbtns=document.querySelectorAll('#filters button');
+  const projs=document.querySelectorAll('.proj');
+  fbtns.forEach(b=>b.addEventListener('click',()=>{
+    fbtns.forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const f=b.dataset.f;
+    projs.forEach(p=>{
+      const show=(f==='all'||p.dataset.cat===f);
+      p.style.display=show?'grid':'none';
+      p.classList.remove('open');
+    });
+  }));
+</script>
+</body>
+</html>
